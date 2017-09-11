@@ -289,21 +289,21 @@ window.Win10 = {
             var iframe = Win10.getLayeroByIndex(index).find('iframe');
             iframe.attr('src', iframe.attr('src'));
         });
-        $(document).on('click', '.win10-btn-change-url', function () {
-            var index = $(this).attr('index');
-            var iframe = Win10.getLayeroByIndex(index).find('iframe');
-            layer.prompt({
-                title: Win10.lang('编辑网址','Edit URL'),
-                formType: 2,
-                skin:'win10-layer-open-browser',
-                value: iframe.attr('src'),
-                area: ['500px', '200px'],
-                zIndex:99999999999
-            }, function (value, i) {
-                layer.close(i);
-                iframe.attr('src', value);
-            });
-        });
+//      $(document).on('click', '.win10-btn-change-url', function () {
+//          var index = $(this).attr('index');
+//          var iframe = Win10.getLayeroByIndex(index).find('iframe');
+//          layer.prompt({
+//              title: Win10.lang('编辑网址','Edit URL'),
+//              formType: 2,
+//              skin:'win10-layer-open-browser',
+//              value: iframe.attr('src'),
+//              area: ['500px', '200px'],
+//              zIndex:99999999999
+//          }, function (value, i) {
+//              layer.close(i);
+//              iframe.attr('src', value);
+//          });
+//      });
         $(document).on('mousedown','.win10-open-iframe',function () {
             var layero=$(this);
             Win10._settop(layero);
@@ -675,7 +675,7 @@ window.Win10 = {
         var layero_opened=Win10.getLayeroByIndex(index);
         layero_opened.css('z-index',Win10._countTask+813);
         Win10._settop(layero_opened);
-        layero_opened.find('.layui-layer-setwin').prepend('<a class="win10-btn-change-url" index="' + index + '" title="'+Win10.lang('修改地址','Change URL')+'" href="javascript:void(0)"><span class="fa fa-chain"></span></a><a class="win10-btn-refresh" index="' + index + '" title="'+Win10.lang('刷新','Refresh')+'" href="javascript:void(0)"><span class="fa fa-refresh"></span></a>');
+//      layero_opened.find('.layui-layer-setwin').prepend('<a class="win10-btn-change-url" index="' + index + '" title="'+Win10.lang('修改地址','Change URL')+'" href="javascript:void(0)"><span class="fa fa-chain"></span></a><a class="win10-btn-refresh" index="' + index + '" title="'+Win10.lang('刷新','Refresh')+'" href="javascript:void(0)"><span class="fa fa-refresh"></span></a>');
         layero_opened.find('.layui-layer-setwin .layui-layer-max').click(function () {
             setTimeout(function () {
                 var height=layero_opened.css('height');
