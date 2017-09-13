@@ -1,4 +1,6 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -52,8 +54,8 @@
 	<body>
 		
 	<div id="fh5co-offcanvass">
-		<a href="#" class="fh5co-offcanvass-close js-fh5co-offcanvass-close">MORE <i class="icon-cross"></i> </a>
-		<h1 class="fh5co-logo"><a class="navbar-brand" href="index.html">更多信息</a></h1>
+		<a href="#" class="fh5co-offcanvass-close js-fh5co-offcanvass-close">关闭 <i class="icon-cross"></i> </a>
+		<h1 class="fh5co-logo"><a class="navbar-brand" href="index.html">${user.username}</a></h1>
 		<ul>
 			<li class="active"><a href="index.html">我的上传</a></li>
 			<li><a href="about.html">上传壁纸</a></li>
@@ -69,7 +71,7 @@
 		</p>
 	</div>
 	<div style="position: fixed; right: 10px; top: 10px;z-index: 87;">
-		<a href="#" class="fh5co-menu-btn js-fh5co-menu-btn" >Menu <i class="icon-menu"></i></a>
+		<a href="#" class="fh5co-menu-btn js-fh5co-menu-btn" >INFO <i class="icon-menu"></i></a>
 	</div>
 	<!-- END .header -->
     

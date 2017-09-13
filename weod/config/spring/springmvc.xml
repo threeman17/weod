@@ -15,6 +15,10 @@
 
 	<!-- Example: prefix="/WEB-INF/jsp/", suffix=".jsp", viewname="test" -> 
 		"/WEB-INF/jsp/test.jsp" -->
+		
+	<mvc:resources location="/WEB-INF/jsp/weodimage/js" mapping="*/js/**"/>
+	<mvc:resources location="/WEB-INF/jsp/weodimage/css" mapping="*/css/**"/>
+	
 	<!-- 配置视图解析器 -->
 	<bean
 	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
