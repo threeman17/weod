@@ -15,13 +15,17 @@
 
 	<!-- Example: prefix="/WEB-INF/jsp/", suffix=".jsp", viewname="test" -> 
 		"/WEB-INF/jsp/test.jsp" -->
+		
+	<mvc:resources location="/WEB-INF/jsp/weodimage/js" mapping="*/js/**"/>
+	<mvc:resources location="/WEB-INF/jsp/weodimage/css" mapping="*/css/**"/>
+	
 	<!-- 配置视图解析器 -->
-	<!-- <bean
+	<bean
 	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		配置逻辑视图的前缀
+		<!-- 配置逻辑视图的前缀 -->
 		<property name="prefix" value="/WEB-INF/jsp/" />
-		配置逻辑视图的后缀
+		<!-- 配置逻辑视图的后缀 -->
 		<property name="suffix" value=".jsp" />
-	</bean> -->
+	</bean>
 
 </beans>
