@@ -41,8 +41,8 @@ public class DataUtil {
 		return columnName.toUpperCase();
 	}
 
-	public static void main(String[] args) {
-//		System.out.println(toFieldByColumnLable("user_name"));
-		System.out.println(toColumnByFieldName("userName"));
-	}
+//	public static void main(String[] args) {
+////		System.out.println(toFieldByColumnLable("user_name"));
+//		System.out.println(toColumnByFieldName("userName"));
+//	}
 }

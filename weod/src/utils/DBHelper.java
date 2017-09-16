@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.sql.rowset.CachedRowSet;
 
+import lbean.Luser;
+
 
 
 public class DBHelper {
@@ -130,6 +132,7 @@ public class DBHelper {
 				| SecurityException e2) {
 			e2.printStackTrace();
 		}
+
 		CachedRowSet rs = DataSource.select(sql, params);
 		List<T> list = new ArrayList<>();
 		try {
@@ -183,21 +186,22 @@ public class DBHelper {
 		}
 	}
 
-//	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//		DBHelper.init("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/1703", "root", "123456");
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		DBHelper.init("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/weod", "root", "root");
 //		DBHelper.delete(Student.class, "and id=?", 3);
 //		DBHelper.startPage(3, 2);
-//		List<Student> list = DBHelper.select("select * from student ", Student.class);
+		List<Luser> list = DBHelper.select("select * from users where userid=?", Luser.class,"1");
 //		PageInfo<Student> stus=new PageInfo<>(list);
 //		System.out.println(stus);
-//		for (Student student : stus.getList()) {
-//			System.out.println(student);
-//		}
+		for (Luser LUSER : list) {
+			
+
+		}
 //		// Student stu = new Student();
 //		// stu.setStuName("张三");
 //		// DBHelper.update(stu, "and id=?", 3);
 //
 //		// System.out.println(DBHelper.insert(stu));
-//		DBHelper.close();
-//	}
+		DBHelper.close();
+	}
 }
