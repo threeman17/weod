@@ -1,11 +1,14 @@
 package lservlet;
 
+
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import lbean.Luser;
 import utils.DBHelper;
@@ -14,7 +17,7 @@ import utils.DataSource;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+//@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,17 +34,23 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userid=request.getParameter("userid");
+		System.out.println(userid);
 		String password=request.getParameter("password");
 		try {
 			DataSource.init("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/weod", "root", "root");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		DBHelper.select("select *from weod ", Luser.class);
-
-		
-		
-		
+		List<Luser> list=DBHelper.select("select * from users where userid=? and password=?", Luser.class,userid,password);
+		System.out.println(list);
+		if (null==list) {
+			response.sendRedirect(request.getContextPath()+"/static/login.html");
+		}
+		Luser userinfo=list.get(0);
+		HttpSession session = request.getSession();
+		session.setAttribute("LOGIN_STATUS", userinfo);
+		DBHelper.close();
+		response.sendRedirect(request.getContextPath()+"/static/index.html");
 	}
 
 }

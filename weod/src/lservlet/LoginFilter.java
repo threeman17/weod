@@ -3,6 +3,7 @@ package lservlet;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -10,15 +11,21 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter("/LoginFilter")
+@WebFilter("/*")
 public class LoginFilter extends HttpServlet implements Filter {
        
-    
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		super.destroy();
+	}
+	
 	/**
 	 * 
 	 */
@@ -26,15 +33,34 @@ public class LoginFilter extends HttpServlet implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req=(HttpServletRequest) request;
-		HttpServletResponse res=(HttpServletResponse) response;
-		Object status=req.getSession().getAttribute("LOGIN_SRATUS");
+		HttpServletResponse res=(HttpServletResponse) response;	
+		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html;charset=UTF-8");
 		String uri=req.getRequestURI();
-		if(status==null&&!uri.contains("login.html")){
-			res.sendRedirect(req.getContextPath()+"/login.html");
+		if(uri.contains("/login")){
+			chain.doFilter(request, response);
+			return;
+		}
+		if(uri.contains("Login")){
+			chain.doFilter(request, response);
+			return;
+		}
+		HttpSession session=req.getSession();
+		Object status=session.getAttribute("LOGIN_STATUS");
+		System.out.println(status);
+		if(status==null){
+			res.sendRedirect(req.getContextPath()+"/static/login.html");
 			return;
 		}
 		chain.doFilter(request, response);
 	}
 
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		// TODO Auto-generated method stub
+		Filter.super.init(filterConfig);
+	}
+
+	
 	
 }

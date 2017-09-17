@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>示例登陆页</title>
+    <script type="text/javascript" src="../../jquery-1.11.0.js" ></script>
     <style>
         #win10-login {
             background: url('./img/wallpapers/login.jpg') no-repeat fixed;
@@ -101,12 +102,13 @@
             <img src="./img/avatar.jpg" class="content"/>
         </div>
         <p style="font-size: 24px;color: white;text-align: center">游客</p>
-        <form target="_self" method="get" action="#">
+        <form target="_self" action="../lservlet/LoginServlet">
             <!--用户名-->
-            <input type="text" placeholder="请输入登录名" class="login-username">
+            <input type="text" placeholder="请输入登录名" class="login-username" name="userid">
             <!--密码-->
-            <input type="password" placeholder="请输入密码" class="login-password">
+            <input type="password" placeholder="请输入密码" class="login-password" name="password">
             <!--登陆按钮-->
+            
             <input type="submit"  value="登录" id="btn-login" class="login-submit"/>
         </form>
     </div>
