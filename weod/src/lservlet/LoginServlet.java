@@ -1,7 +1,7 @@
 package lservlet;
 
-
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,40 +17,44 @@ import utils.DataSource;
 /**
  * Servlet implementation class LoginServlet
  */
-//@WebServlet("/LoginServlet")
+// @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userid=request.getParameter("userid");
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String userid = request.getParameter("userid");
 		System.out.println(userid);
-		String password=request.getParameter("password");
+		String password = request.getParameter("password");
 		try {
-			DataSource.init("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/weod", "root", "root");
+			DataSource.init("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/weod", "root", "root");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		List<Luser> list=DBHelper.select("select * from users where userid=? and password=?", Luser.class,userid,password);
+		List<Luser> list = DBHelper.select("select * from users where userid=? and password=?", Luser.class, userid,
+				password);
 		System.out.println(list);
-		if (null==list) {
-			response.sendRedirect(request.getContextPath()+"/static/login.html");
+		if (null == list) {
+			response.sendRedirect(request.getContextPath() + "/jsp/login.html");
 		}
-		Luser userinfo=list.get(0);
+		Luser userinfo = list.get(0);
 		HttpSession session = request.getSession();
 		session.setAttribute("LOGIN_STATUS", userinfo);
+		System.out.println(userinfo);
 		DBHelper.close();
-		response.sendRedirect(request.getContextPath()+"/static/index.html");
+		response.sendRedirect(request.getContextPath() + "/jsp/index.html");
 	}
 
 }

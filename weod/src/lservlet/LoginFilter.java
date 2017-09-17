@@ -46,10 +46,10 @@ public class LoginFilter extends HttpServlet implements Filter {
 			return;
 		}
 		HttpSession session=req.getSession();
-		Object status=session.getAttribute("LOGIN_STATUS");
-		System.out.println(status);
+		Object status=session.getAttribute("LOGIN_STATUS");		
 		if(status==null){
-			res.sendRedirect(req.getContextPath()+"/static/login.html");
+			System.out.println(req.getContextPath());
+			res.sendRedirect(req.getContextPath()+"/jsp/login.html");
 			return;
 		}
 		chain.doFilter(request, response);
