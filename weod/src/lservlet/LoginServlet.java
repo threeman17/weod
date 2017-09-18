@@ -42,11 +42,13 @@ public class LoginServlet extends HttpServlet {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		List<Luser> list = DBHelper.select("select * from users where userid=? and password=?", Luser.class, userid,
+		List<Luser> list=null;
+		list = DBHelper.select("select * from users where userid=? and password=?", Luser.class, userid,
 				password);
 		System.out.println(list);
-		if (null == list) {
-			response.sendRedirect(request.getContextPath() + "/jsp/login.html");
+		if (list.isEmpty()||list==null) {
+			response.getWriter().write("登陆失败！");
+//			response.sendRedirect(request.getContextPath() + "/jsp/login.html");
 		}
 		Luser userinfo = list.get(0);
 		HttpSession session = request.getSession();
