@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		session.setAttribute("LOGIN_STATUS", userinfo);
 		System.out.println(userinfo);
 		DBHelper.close();
-		response.sendRedirect(request.getContextPath() + "/jsp/index.html");
+		response.sendRedirect(request.getContextPath() + "/jsp/index.jsp");
 	}
 
 }

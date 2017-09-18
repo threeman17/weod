@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -24,7 +26,7 @@
              font-size: 16px;
          }
          i.pngt{
-         	content: url(./img/icon/re.png);
+         	content: url(img/icon/re.png);
          	display: block;
          	float: left;
          	height: 30px;
@@ -32,15 +34,7 @@
          	margin: 5px 0px 0px 0px;
          }
          i.pnge{
-         	content: url(./img/icon/exit.png);
-         	display: block;
-         	float: left;
-         	height: 30px;
-         	width: 30px;
-         	margin: 5px 0px 0px 0px;
-         }
-         i.pngm{
-         	content: url(./img/icon/mess.png);
+         	content: url(img/icon/exit.png);
          	display: block;
          	float: left;
          	height: 30px;
@@ -103,8 +97,9 @@
                  onclick="Win10.exit()">
                 <i class="pnge"></i>退出
             </div>
-            <div class="item" onclick="Win10.openUrl('./showuser.jsp','<img class=\'icon\' src=\'./img/icon/asd.png\'/>个人信息')"><i class="pngm"></i>个人信息</div>
-            <div class="item" onclick="Win10.openUrl('./updateuser.jsp','<img class=\'icon\' src=\'./img/icon/update.png\'/>编辑资料')"><i class="pngt"></i>编辑资料</div>           
+            <div class="item" onclick="Win10.openUrl('./showuser.jsp','<img class=\'icon\' src=\'./img/icon/weodmusic.png\'/>个人信息')"><i class="pngt"></i>个人信息</div>
+            <div class="item"><i class="pngt"></i>编辑资料</div>
+            <div class="sub-item">二级菜单</div>
         </div>
         <div class="blocks">
             <div class="menu_group">
