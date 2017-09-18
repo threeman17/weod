@@ -36,8 +36,7 @@
 									<tr>																		
 										<td valign="top" class="pad">	
 										<font color="lightgray">										
-											<br />	
-																				
+											<br />																					
 										用户ID：	${LOGIN_STATUS.userid} 	<br /><br />																									
 										昵称：${LOGIN_STATUS.nickname}		<br /><br />	
 										创建时间：<fmt:formatDate value="${LOGIN_STATUS.createtime}" pattern="yyyy-MM-dd"/> 	<br /><br />

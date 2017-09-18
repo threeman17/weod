@@ -23,94 +23,113 @@ public class DBHelper {
 		DataSource.close();
 	}
 
-	public static int insert(Object obj) {
-		// insert into tableName(column1,column2...) values(?,?...)
-		// 1.表名 => 通过类名转换获得
-		// 2.字段名 => 通过属性名转换获得
-		// 3.顺序 => 通过集合保存顺序
-		// 4.有值才插入 => 判断属性是否不为null
+//	public static int insert(Object obj) {
+//		// insert into tableName(column1,column2...) values(?,?...)
+//		// 1.表名 => 通过类名转换获得
+//		// 2.字段名 => 通过属性名转换获得
+//		// 3.顺序 => 通过集合保存顺序
+//		// 4.有值才插入 => 判断属性是否不为null
+//
+//		Class<?> type = obj.getClass();
+//		List<String> fieldNames = ClassUtils.getFieldNames(type);
+//		List<String> names = new ArrayList<>();
+//		List<Object> values = new ArrayList<>();
+//		for (String fieldName : fieldNames) {
+//			try {
+//				// 从待新增对象中获取属性的值
+//				Object value = ClassUtils.get(obj, fieldName);
+//				if (value != null) {
+//					// 保存列的顺序
+//					names.add(DataUtil.toColumnByFieldName(fieldName));
+//					// 保存值的顺序
+//					values.add(value);
+//				}
+//			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		// 拼接SQL
+//		StringBuffer sb = new StringBuffer();
+//		sb.append("insert into ");
+//		// 获取表名并追加到SQL中
+//		sb.append(DataUtil.toColumnByFieldName(type.getSimpleName()));
+//		sb.append("(");
+//		for (String name : names) {
+//			sb.append(name).append(",");
+//		}
+//		// 删除最后多余的逗号
+//		sb.deleteCharAt(sb.length() - 1);
+//		sb.append(") values(");
+//		for (Object object : values) {
+//			sb.append("?,");
+//		}
+//		// 删除最后多余的逗号
+//		sb.deleteCharAt(sb.length() - 1);
+//		sb.append(")");
+//		System.out.println(sb);
+//		return DataSource.update(sb.toString(), values.toArray());
+//	}
 
-		Class<?> type = obj.getClass();
-		List<String> fieldNames = ClassUtils.getFieldNames(type);
-		List<String> names = new ArrayList<>();
-		List<Object> values = new ArrayList<>();
-		for (String fieldName : fieldNames) {
-			try {
-				// 从待新增对象中获取属性的值
-				Object value = ClassUtils.get(obj, fieldName);
-				if (value != null) {
-					// 保存列的顺序
-					names.add(DataUtil.toColumnByFieldName(fieldName));
-					// 保存值的顺序
-					values.add(value);
-				}
-			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-				e.printStackTrace();
-			}
-		}
-		// 拼接SQL
-		StringBuffer sb = new StringBuffer();
-		sb.append("insert into ");
-		// 获取表名并追加到SQL中
-		sb.append(DataUtil.toColumnByFieldName(type.getSimpleName()));
-		sb.append("(");
-		for (String name : names) {
-			sb.append(name).append(",");
-		}
-		// 删除最后多余的逗号
-		sb.deleteCharAt(sb.length() - 1);
-		sb.append(") values(");
-		for (Object object : values) {
-			sb.append("?,");
-		}
-		// 删除最后多余的逗号
-		sb.deleteCharAt(sb.length() - 1);
-		sb.append(")");
-		System.out.println(sb);
-		return DataSource.update(sb.toString(), values.toArray());
-	}
+//	public static int update(Object obj, String where, Object... params) throws SQLException {
+//		// update tableName set column=?,column2=?... where
+//		// and ...
+//		// or ...
+//		// 1.表名
+//		// 2.字段名
+//		// 3.顺序
+//		Class<? extends Object> type = obj.getClass();
+//		StringBuffer sql = new StringBuffer();
+//		sql.append("update ");
+//		sql.append(DataUtil.toColumnByFieldName(type.getSimpleName()));
+//		sql.append(" set ");
+//		List<String> fieldNames = ClassUtils.getFieldNames(type);
+//		List<Object> values = new ArrayList<>();
+//		for (String fieldName : fieldNames) {
+//			try {
+//				Object value = ClassUtils.get(obj, fieldName);
+//				if (value != null) {
+//					sql.append(" ").append(DataUtil.toColumnByFieldName(fieldName)).append("=?,");
+//					values.add(value);
+//				}
+//			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		if (values.isEmpty()) {
+//			throw new SQLException("没有需要更新的数据");
+//		}
+//		for (Object object : params) {
+//			values.add(object);
+//		}
+//		// 删除最后一个多余的逗号
+//		sql.deleteCharAt(sql.length() - 1);
+//		sql.append(" where 1=1 ").append(where);
+//		return DataSource.update(sql.toString(), values.toArray());
+//	}
 
-	public static int update(Object obj, String where, Object... params) throws SQLException {
-		// update tableName set column=?,column2=?... where
-		// and ...
-		// or ...
-		// 1.表名
-		// 2.字段名
-		// 3.顺序
-		Class<? extends Object> type = obj.getClass();
-		StringBuffer sql = new StringBuffer();
-		sql.append("update ");
-		sql.append(DataUtil.toColumnByFieldName(type.getSimpleName()));
-		sql.append(" set ");
-		List<String> fieldNames = ClassUtils.getFieldNames(type);
-		List<Object> values = new ArrayList<>();
-		for (String fieldName : fieldNames) {
-			try {
-				Object value = ClassUtils.get(obj, fieldName);
-				if (value != null) {
-					sql.append(" ").append(DataUtil.toColumnByFieldName(fieldName)).append("=?,");
-					values.add(value);
-				}
-			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-				e.printStackTrace();
-			}
+	public static int updateuser(String where,String... params){
+//		update users set column=?,column2=?... where  and ...
+		StringBuffer update = new StringBuffer();
+		update.append("update users set ");				
+		List<String> values = new ArrayList<>();
+		for (String string : params) {
+			values.add(string);
+			update.append(string);
+			update.append(",");
 		}
-		if (values.isEmpty()) {
-			throw new SQLException("没有需要更新的数据");
-		}
-		for (Object object : params) {
-			values.add(object);
-		}
-		// 删除最后一个多余的逗号
-		sql.deleteCharAt(sql.length() - 1);
-		sql.append(" where 1=1 ").append(where);
-		return DataSource.update(sql.toString(), values.toArray());
-	}
-
-	public static int delete(Class<?> type, String where, Object... params) {
-		return DataSource.update(
-				"delete from " + DataUtil.toColumnByFieldName(type.getSimpleName()) + " where 1=1 " + where, params);
-	}
+		update.deleteCharAt(update.length() - 1);
+		update.append(" where 1=1 and ");
+		update.append(where);
+//		System.out.println(update.toString());
+		return DataSource.update(update.toString());
+		} 
+	
+	
+	
+//	public static int delete(Class<?> type, String where, Object... params) {
+//		return DataSource.update(
+//				"delete from " + DataUtil.toColumnByFieldName(type.getSimpleName()) + " where 1=1 " + where, params);
+//	}
 
 	public static <T> List<T> select(String sql, Class<T> type, Object... params) {
 		// select ... from tablename where ....
@@ -186,23 +205,20 @@ public class DBHelper {
 		}
 	}
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		DBHelper.init("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/weod", "root", "root");
+//	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//		DBHelper.init("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/weod", "root", "root");
 //		DBHelper.delete(Student.class, "and id=?", 3);
 //		DBHelper.startPage(3, 2);
-		List<Luser> list = DBHelper.select("select * from users where userid=? and password=?", Luser.class,"1","2");
-		System.out.println(list.get(0));
+//		List<Luser> list = DBHelper.select("select * from users where userid=? and password=?", Luser.class,"1","2");
+//		System.out.println(list.get(0));
 //		PageInfo<Student> stus=new PageInfo<>(list);
 //		System.out.println(stus);
-//		for (Luser LUSER : list) {
-//			
-//
-//		}
-//		// Student stu = new Student();
-//		// stu.setStuName("张三");
-//		// DBHelper.update(stu, "and id=?", 3);
-//
+
+//		 Luser user = new Luser();
+//		 user.setNickname("张三");
+//		 DBHelper.update(user, "and id=?", 1);
+//		DBHelper.updateuser("userid='1'","nickname='张三'","password='3'");
 //		// System.out.println(DBHelper.insert(stu));
-		DBHelper.close();
-	}
+//		DBHelper.close();
+//	}
 }

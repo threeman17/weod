@@ -29,11 +29,19 @@
     <url-pattern>*.action</url-pattern>
   </servlet-mapping>
   <servlet>
-      <servlet-name>LoginServlet</servlet-name>
-      <servlet-class>lservlet.LoginServlet</servlet-class>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>lservlet.LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-      <servlet-name>LoginServlet</servlet-name>
-      <url-pattern>/lservlet/LoginServlet</url-pattern>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/lservlet/LoginServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>UpdateUserServlet</servlet-name>
+    <servlet-class>lservlet.UpdateUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateUserServlet</servlet-name>
+    <url-pattern>/lservlet/UpdateUserServlet</url-pattern>
   </servlet-mapping>
 </web-app>

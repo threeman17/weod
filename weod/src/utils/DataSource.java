@@ -70,15 +70,15 @@ public class DataSource {
 	 *            参数列表
 	 * @return
 	 */
-	public static int update(String sql, Object... params) {
+	public static int update(String sql) {
 		Connection connection = getConnection();
 		PreparedStatement ps = null;
 		try {
 			System.out.println(sql);
 			ps = connection.prepareStatement(sql);// 获取预编译操作对象
-			for (int i = 0; i < params.length; i++) {
-				ps.setObject(i + 1, params[i]);
-			}
+//			for (int i = 0; i < params.length; i++) {
+//				ps.setObject(i + 1, params[i]);
+//			}
 			return ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
